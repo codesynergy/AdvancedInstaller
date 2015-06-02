@@ -14,13 +14,15 @@
 					#I don't believe this property is required for the actual build of the installer. So, if you don't care how the registry entries show up inside of AI, just leave this argument as "false".
 	#Platform - 32 or 64 - are these registry entries being made in the 32bit or 64bit registry hive.
 	#ComponentInstallDir - the installation directory MSI property that the component is being installed to. Ex: "[APPDIR]"
-#Example: MyFile.reg MyAIProject.aip MyFileComponent false 32 [APPDIR] >C:\out.txt	
+#Example: Import_Reg.py MyFile.reg MyAIProject.aip MyFileComponent false 32 [APPDIR] >C:\out.txt	
+#A batch file example: %ImportRegFile% "%RegFileDir%MyProgram.reg" %AIProjectFile% MyProgram.dll %COMProperty% %Bitness% [APPDIR]
 #Notes:
 #Currently, the reg file must be in the following format:UTF-8 w/o BOM, which is not the default reg file encoding.
 #Other than the encoding, registry files need to be in the format as if they were "exported" from the windows registry.
 #AI formats the values of a key in a specific way (character escapes, [APPDIR], etc.). It is likely that I did not address every formatting scenario.
 #The "FormatAIRegEntry" function can be modified to address further formatting issues.
 #Also, window's registry entries are formatted in a certain way. It's possible I did not address every formatting scenario, especially foreign characters.
+#This script should not be run on the same AI project file more than once, as it will just keep appending registry entries. So, either run this script on your project file once, and check in the changes. Or, run the script on your AI project file during the build process, but don't save the registry additions.
 
 
 import sys
