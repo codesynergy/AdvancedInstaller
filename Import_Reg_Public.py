@@ -3,7 +3,7 @@
 #Import_Reg.py
 #Python 3.X
 #By codesynergy
-#Last Updated: June 2, 2015
+#Last Updated: June 24, 2015
 #This script imports a registry file into a given component in an Advanced Installer project file.
 #Arguments: 
 	#RegistryFile.reg - The registry file you want to import. Must be in UTF-8 w/o BOM format.
@@ -371,7 +371,7 @@ def GetRegValue(strRegValue):
 		pattern2 = re.compile("\".*\"")
 		m2 = pattern2.search(strRegValue)		
 		if m2:
-			strValueTemp = m2.group(0).strip('"')
+			strValueTemp = m2.group(0)[1:-1]
 	
 	#The current line is a non-default value 
 	#pattern = re.compile("\".*\"=\".*\"")
